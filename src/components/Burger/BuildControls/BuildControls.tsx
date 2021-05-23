@@ -16,6 +16,9 @@ const controls = [
 const BuildControls: FC<{
   items: Ingredients;
   addIngredient: (ingredient: string) => void;
+  removeIngredient: (ingredient: string) => void;
+  disabled: { [x: string]: number };
+  order: () => void;
 }> = (props) => {
   const price = `$${props.items.totalPrice.toFixed(2)}`;
 
@@ -24,7 +27,8 @@ const BuildControls: FC<{
       key={item.label}
       label={item.label}
       added={props.addIngredient.bind(null, item.type)}
-      disabled={false}
+      removed={props.removeIngredient.bind(null, item.type)}
+      disabled={props.disabled[item.type]}
     />
   ));
 
@@ -34,7 +38,9 @@ const BuildControls: FC<{
         Current Price: <strong>{price}</strong>
       </p>
       {buildControls}
-      <button className={classes.OrderButton}>ORDER NOW</button>
+      <button className={classes.OrderButton} onClick={props.order}>
+        ORDER NOW
+      </button>
     </section>
   );
 };
