@@ -1,9 +1,12 @@
 import { FC } from 'react';
 
+import Burger from '../../components/Burger/Burger';
+
 const BurgerBuilder: FC = () => {
   return (
-    <div>
-      <h1>Burger Builder Page</h1>
+    <div style={{ paddingTop: '25px', background: '#fbe6a6' }}>
+      <Burger />
+      <h1>Burger Build Controls</h1>
     </div>
   );
 };
