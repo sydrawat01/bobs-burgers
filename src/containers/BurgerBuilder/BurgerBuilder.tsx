@@ -83,7 +83,7 @@ const BurgerBuilder: FC = () => {
         order={orderHandler}
       />
       <Modal show={showModal} close={closeModalHandler}>
-        <OrderSummary />
+        <OrderSummary ingredients={ingredients} />
       </Modal>
     </div>
   );

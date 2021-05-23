@@ -1,0 +1,14 @@
+.OrderSummaryTitle,
+.OrderSummaryTotal,
+.OrderSummaryText {
+  color: #e58407;
+}
+
+.OrderSummarySubTitle,
+.OrderSummaryList {
+  color: #eb9f31;
+}
+
+.OrderSummaryList {
+  color: #888888;
+}
