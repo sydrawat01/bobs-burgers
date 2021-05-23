@@ -28,23 +28,12 @@
   background: linear-gradient(to bottom, #f7b34f 60%, #e8a040 78%);
   border-radius: 0 20% 50% 0;
 }
-/*
-.Shadow {
-  position: absolute;
-  bottom: -40%;
-  left: -28px;
-  width: 125%;
-  height: 70%;
-  background: #eae7e4;
-  border-radius: 50%;
-  z-index: -100
-} */
 
 .BreadTop {
   height: 37%;
   width: 80%;
   background: #f7b34f;
-  border-radius: 155px 155px 0 0;
+  border-radius: 155px 155px 15px 15px;
   margin: 0 auto;
   position: relative;
 }

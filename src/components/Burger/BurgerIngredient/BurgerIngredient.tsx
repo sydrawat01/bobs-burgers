@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import classes from './BurgerIngredient.module.css';
 
-const BurgerIngredient: FC<{ type: string | null }> = (props) => {
+const BurgerIngredient: FC<{ type: string | number }> = (props) => {
   let ingredients;
   switch (props.type) {
     case 'bread-top':
@@ -35,9 +35,6 @@ const BurgerIngredient: FC<{ type: string | null }> = (props) => {
       break;
     case 'cheese':
       ingredients = <div className={classes.Cheese} />;
-      break;
-    case 'bacon':
-      ingredients = <div className={classes.Bacon} />;
       break;
     case 'salad':
       ingredients = <div className={classes.Salad} />;
