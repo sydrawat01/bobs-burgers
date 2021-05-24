@@ -30,6 +30,7 @@ export const burgerSlice = createSlice({
       const ingredient = action.payload;
       state.ingredients[ingredient] += 1;
       state.totalPrice += INGREDIENT_PRICES[ingredient];
+      state.totalPrice = parseFloat(state.totalPrice.toFixed(2));
     },
     removeIngredient(state: Ingredients, action: PayloadAction<string>) {
       const ingredient = action.payload;
@@ -37,6 +38,7 @@ export const burgerSlice = createSlice({
         ? (state.ingredients[ingredient] = 0)
         : (state.ingredients[ingredient] -= 1);
       state.totalPrice -= INGREDIENT_PRICES[ingredient];
+      state.totalPrice = parseFloat(state.totalPrice.toFixed(2));
     },
   },
 });

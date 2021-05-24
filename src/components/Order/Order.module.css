@@ -1,0 +1,45 @@
+.Order {
+  display: flex;
+  width: 80%;
+  margin: 10px auto;
+  box-sizing: border-box;
+}
+
+.OrderLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fad585;
+  padding: 0 1rem;
+  border-radius: 10px 0 0 10px;
+}
+
+.OrderLogo img {
+  height: 50px;
+}
+
+.OrderInfo {
+  background: #fcedaa;
+  flex-grow: 1;
+  border-radius: 0 10px 10px 0;
+  padding: 1rem;
+}
+
+.OrderInfo span:nth-of-type(1) {
+  margin: 0px 0 7px !important;
+  padding: 0 0 5px !important;
+}
+
+.OrderIngredients {
+  margin: 0;
+  border-radius: 10px 10px 0 0;
+  color: #e27507;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.OrderPrice {
+  margin: 0;
+  border-radius: 0 0 10px 10px;
+  color: #e27507;
+}

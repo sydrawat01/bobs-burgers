@@ -1,20 +1,27 @@
 import { FC, FormEvent, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
 
-import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.module.css';
 
-const ContactData: FC = () => {
+const ContactData: FC<{ order: (data: {}) => void }> = (props) => {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const streetInputRef = useRef<HTMLInputElement>(null);
   const postalInputRef = useRef<HTMLInputElement>(null);
   const cityInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
 
-  const history = useHistory();
-
   const confirmHandler = (event: FormEvent) => {
     event.preventDefault();
+
+    const customer = {
+      name: nameInputRef.current!.value,
+      email: emailInputRef.current!.value,
+      address: {
+        street: streetInputRef.current!.value,
+        zip: postalInputRef.current!.value,
+        city: cityInputRef.current!.value,
+      },
+    };
+    props.order(customer);
   };
 
   const form = (
@@ -61,15 +68,13 @@ const ContactData: FC = () => {
           ref={emailInputRef}
         />
 
-        <Button btnType="Success" onClick={() => history.replace('/orders')}>
-          ORDER
-        </Button>
+        <button className={classes.Button}>ORDER</button>
       </form>
     </div>
   );
   return (
     <div className={classes.ContactData}>
-      <h4>Please Enter Your Contact Data</h4>
+      <h3>Enter Your Contact Details</h3>
       {form}
     </div>
   );

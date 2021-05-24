@@ -4,15 +4,18 @@
   text-align: center;
   padding: 10px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.ContactData h4 {
+.ContactData h3 {
   color: #888888;
 }
 
 .Input {
-  width: 100%;
-  padding: 10px;
+  width: 80%;
   box-sizing: border-box;
 }
 
@@ -46,6 +49,24 @@
 .Invalid {
   border: 1px solid red;
   background-color: #fda49a;
+}
+
+.Button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 10px;
+  margin: 10px;
+  font-weight: bold;
+  color: #efcc7c;
+}
+
+.Button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
 }
 
 @media (min-width: 600px) {
