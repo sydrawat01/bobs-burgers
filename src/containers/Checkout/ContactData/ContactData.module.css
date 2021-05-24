@@ -1,0 +1,60 @@
+.ContactData {
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.ContactData h4 {
+  color: #888888;
+}
+
+.Input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.Label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.InputElement {
+  outline: none;
+  border: none;
+  background-color: white;
+  color: #888888;
+  font: inherit;
+  padding: 6px 10px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  background: cornsilk;
+  height: 45px;
+}
+
+.InputElement:focus {
+  outline: none;
+  background-color: #ccc;
+}
+
+.Invalid {
+  border: 1px solid red;
+  background-color: #fda49a;
+}
+
+@media (min-width: 600px) {
+  .ContactData,
+  .InputElement,
+  .Input,
+  .Label,
+  .InputElement:focus,
+  .Invalid {
+    width: 500px;
+  }
+}

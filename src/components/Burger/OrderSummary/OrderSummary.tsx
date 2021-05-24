@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useHistory } from 'react-router-dom';
+
 import { Ingredients } from '../../../models/Burger';
 
 import Button from '../../UI/Button/Button';
@@ -18,6 +20,11 @@ const OrderSummary: FC<{ ingredients: Ingredients; close: () => void }> = (
       </li>
     ) : null
   );
+
+  const history = useHistory();
+  const continuePurchase = () => {
+    history.replace('/checkout');
+  };
   return (
     <>
       <h3 className={classes.OrderSummaryTitle}>Your Order</h3>
@@ -32,7 +39,7 @@ const OrderSummary: FC<{ ingredients: Ingredients; close: () => void }> = (
       <Button btnType="Danger" onClick={props.close}>
         CANCEL
       </Button>
-      <Button btnType="Success" onClick={() => alert('you clicked continue')}>
+      <Button btnType="Success" onClick={continuePurchase}>
         CONTINUE
       </Button>
     </>
