@@ -15,7 +15,7 @@ const Burger: FC<{ items: Ingredients }> = (props) => {
     )
     .reduce((arr, el) => arr.concat(el), []);
 
-  const emptyMsg = <p>Please add ingredients!</p>;
+  const emptyMsg = <p className={classes.Start}>Please add ingredients!</p>;
 
   return (
     <div className={classes.Burger}>

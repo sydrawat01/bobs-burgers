@@ -2,9 +2,13 @@ import { FC } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Ingredients } from '../../../models/Burger';
 
+import Button from '../../UI/Button/Button';
+
 import classes from './OrderSummary.module.css';
 
-const OrderSummary: FC<{ ingredients: Ingredients }> = (props) => {
+const OrderSummary: FC<{ ingredients: Ingredients; close: () => void }> = (
+  props
+) => {
   const ing = props.ingredients.ingredients;
   const ingSummary = Object.keys(ing).map((igKey) =>
     ing[igKey] > 0 ? (
@@ -25,6 +29,12 @@ const OrderSummary: FC<{ ingredients: Ingredients }> = (props) => {
         Price: ${props.ingredients.totalPrice.toFixed(2)}
       </p>
       <p className={classes.OrderSummaryText}>Continue to Checkout?</p>
+      <Button btnType="Danger" onClick={props.close}>
+        CANCEL
+      </Button>
+      <Button btnType="Success" onClick={() => alert('you clicked continue')}>
+        CONTINUE
+      </Button>
     </>
   );
 };
