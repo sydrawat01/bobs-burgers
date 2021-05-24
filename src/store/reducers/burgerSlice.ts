@@ -35,7 +35,7 @@ export const burgerSlice = createSlice({
       const ingredient = action.payload;
       state.ingredients[ingredient] <= 0
         ? (state.ingredients[ingredient] = 0)
-        : (state.ingredients[ingredient] += 1);
+        : (state.ingredients[ingredient] -= 1);
       state.totalPrice -= INGREDIENT_PRICES[ingredient];
     },
   },
