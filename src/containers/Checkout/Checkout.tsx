@@ -32,7 +32,7 @@ const Checkout: FC = () => {
     setIsLoading(true);
     setError(null);
     fetch(
-      'https://codesandbox-burger-default-rtdb.firebaseio.com/orders.jsonn',
+      'https://codesandbox-burger-default-rtdb.firebaseio.com/orders.json',
       {
         method: 'POST',
         headers: {
