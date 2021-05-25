@@ -30,3 +30,7 @@
   height: 11%;
   margin-bottom: 32px;
 }
+
+.Logo h3 {
+  display: none;
+}

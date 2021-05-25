@@ -1,4 +1,6 @@
-import { FC, FormEvent, useRef } from 'react';
+import { FC, FormEvent, useRef, useState } from 'react';
+
+import Modal from '../../../components/UI/Modal/Modal';
 
 import classes from './ContactData.module.css';
 
@@ -8,6 +10,8 @@ const ContactData: FC<{ order: (data: {}) => void }> = (props) => {
   const postalInputRef = useRef<HTMLInputElement>(null);
   const cityInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
+
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const confirmHandler = (event: FormEvent) => {
     event.preventDefault();
@@ -21,7 +25,20 @@ const ContactData: FC<{ order: (data: {}) => void }> = (props) => {
         city: cityInputRef.current!.value,
       },
     };
-    props.order(customer);
+    // Basic validation
+    const { name, email, address } = customer;
+    const { street, zip, city } = address;
+    if (
+      name.trim().length === 0 ||
+      email.trim().length === 0 ||
+      street.trim().length === 0 ||
+      zip.trim().length < 5 ||
+      city.trim().length === 0
+    ) {
+      setShowModal(true);
+    } else {
+      props.order(customer);
+    }
   };
 
   const form = (
@@ -76,6 +93,11 @@ const ContactData: FC<{ order: (data: {}) => void }> = (props) => {
     <div className={classes.ContactData}>
       <h3>Enter Your Contact Details</h3>
       {form}
+      {showModal && (
+        <Modal show={showModal} close={() => setShowModal(false)}>
+          <h2 style={{ color: 'crimson' }}>Please enter valid details!</h2>
+        </Modal>
+      )}
     </div>
   );
 };

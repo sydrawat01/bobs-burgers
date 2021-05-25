@@ -21,8 +21,17 @@
   height: 80%;
 }
 
+.Logo a {
+  text-decoration: none;
+  color: #eb9f31;
+  height: 100%;
+}
+
 @media (max-width: 499px) {
   .DesktopOnly {
+    display: none;
+  }
+  .Logo h3 {
     display: none;
   }
 }
