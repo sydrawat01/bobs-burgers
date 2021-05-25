@@ -1,6 +1,6 @@
 # :hamburger: Burger App
 
-A burger builder app, that lets you sculpt your own delicious burger! Check it out [here](https://codesandbox-burger.web.app/).
+A burger builder app, that lets you sculpt your own delicious burger! Check it out [here](https://bobs-burgers-f1443.web.app).
 
 ## Features
 

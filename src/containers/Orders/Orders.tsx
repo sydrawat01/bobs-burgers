@@ -35,9 +35,7 @@ const Orders: FC = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const req = await fetch(
-        'https://codesandbox-burger-default-rtdb.firebaseio.com/orders.json'
-      );
+      const req = await fetch(process.env.REACT_APP_ORDERS!);
       setIsLoading(false);
       if (!req.ok) throw new Error('Unable to reach server at the moment!');
       const res = await req.json();

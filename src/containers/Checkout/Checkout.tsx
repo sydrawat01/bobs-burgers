@@ -29,16 +29,13 @@ const Checkout: FC = () => {
       price: totalPrice,
       customer: data,
     };
-    fetch(
-      'https://codesandbox-burger-default-rtdb.firebaseio.com/orders.json',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(order),
-      }
-    )
+    fetch(process.env.REACT_APP_ORDERS!, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(order),
+    })
       .then((res) => {
         if (res.ok) {
           return res.json();
