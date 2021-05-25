@@ -9,10 +9,10 @@ import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 
 const App = () => {
   const { ingredients } = useAppSelector(items);
-  const valid = Object.keys(ingredients)
-    .map((igKey) => ingredients[igKey])
-    .reduce((acc, el) => acc + el, 0);
-  console.log(valid);
+  const valid =
+    Object.keys(ingredients)
+      .map((igKey) => ingredients[igKey])
+      .reduce((acc, el) => acc + el, 0) !== 0;
 
   let routes = (
     <Switch>
