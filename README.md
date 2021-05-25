@@ -1,11 +1,12 @@
-# Burger App
+# :hamburger: Burger App
 
-A burger builder app, that lets you sculpt your own delicious burger! This is still a WIP.
+A burger builder app, that lets you sculpt your own delicious burger! Check it out [here](https://codesandbox-burger.web.app/).
 
 ## Features
 
-- Firebase Real Time database to store orders.
+- Firebase Realtime database to store orders.
 - Redux Toolkit to manage app-wide data about burger ingredients and total price.
+- Typescript
 
 ## Pending Features
 
