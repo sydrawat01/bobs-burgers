@@ -1,26 +1,27 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 
+import { useAppSelector, items } from './store/hooks/rtkHooks';
+
 import Layout from './hoc/Layout/Layout';
-import Auth from './containers/Auth/Auth';
-import Logout from './containers/Auth/Logout/Logout';
 import Checkout from './containers/Checkout/Checkout';
 import Orders from './containers/Orders/Orders';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 
 const App = () => {
+  const { ingredients } = useAppSelector(items);
+  const valid = Object.keys(ingredients)
+    .map((igKey) => ingredients[igKey])
+    .reduce((acc, el) => acc + el, 0);
+  console.log(valid);
+
   let routes = (
     <Switch>
       <Route path="/" exact>
         <BurgerBuilder />
       </Route>
-      <Route path="/auth">
-        <Auth />
-      </Route>
-      <Route path="/logout">
-        <Logout />
-      </Route>
       <Route path="/checkout">
-        <Checkout />
+        {valid && <Checkout />}
+        {!valid && <Redirect to="/" />}
       </Route>
       <Route path="/orders">
         <Orders />

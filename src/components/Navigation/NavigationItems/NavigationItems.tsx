@@ -13,12 +13,6 @@ const NavigationItems: FC = () => {
       <NavigationItem exact={false} link="/orders">
         Orders
       </NavigationItem>
-      <NavigationItem exact={false} link="/logout">
-        Logout
-      </NavigationItem>
-      <NavigationItem exact={false} link="/auth">
-        Login
-      </NavigationItem>
     </ul>
   );
 };

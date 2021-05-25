@@ -32,13 +32,22 @@ const BuildControls: FC<{
     />
   ));
 
+  const valid =
+    Object.keys(props.items.ingredients)
+      .map((igKey) => props.items.ingredients[igKey])
+      .reduce((acc, el) => acc + el, 0) !== 0;
+
   return (
     <section className={classes.BuildControls}>
       <p className={classes.OrderPrice}>
         Current Price: <strong>{price}</strong>
       </p>
       {buildControls}
-      <button className={classes.OrderButton} onClick={props.order}>
+      <button
+        className={classes.OrderButton}
+        onClick={props.order}
+        disabled={!valid}
+      >
         ORDER NOW
       </button>
     </section>

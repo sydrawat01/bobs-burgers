@@ -9,7 +9,5 @@ A burger builder app, that lets you sculpt your own delicious burger! This is st
 
 ## Pending Features
 
-- Disable buttons when no ingredients are present in burger builder.
-- Add auth to app [using redux toolkit].
-- Display orders for currently logged in user only.
-- Navigation guards to prevent user from reaching unauthorized routes in the app.
+- Form validation at checkout. Disable buttons at checkout when form is not valid.
+- Add spinner at checkout page and then transition to orders page.

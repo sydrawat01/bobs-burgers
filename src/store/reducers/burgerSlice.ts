@@ -40,6 +40,9 @@ export const burgerSlice = createSlice({
       state.totalPrice -= INGREDIENT_PRICES[ingredient];
       state.totalPrice = parseFloat(state.totalPrice.toFixed(2));
     },
+    resetOrder(state: Ingredients) {
+      state = { ...initialState };
+    },
   },
 });
 

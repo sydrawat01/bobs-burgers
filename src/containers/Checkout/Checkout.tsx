@@ -1,18 +1,18 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useHistory, Route } from 'react-router-dom';
-import { useAppSelector, items } from '../../store/hooks/rtkHooks';
+import {
+  useAppSelector,
+  items,
+  useAppDispatch,
+} from '../../store/hooks/rtkHooks';
+import { resetOrder } from '../../store/actions/burgerActions';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
-import Modal from '../../components/UI/Modal/Modal';
-import Spinner from '../../components/UI/Spinner/Spinner';
 
 const Checkout: FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-
   const history = useHistory();
+  const dispatch = useAppDispatch();
   const { ingredients, totalPrice } = useAppSelector(items);
   const path = `${history.location.pathname}/contact-data`;
 
@@ -29,8 +29,6 @@ const Checkout: FC = () => {
       price: totalPrice,
       customer: data,
     };
-    setIsLoading(true);
-    setError(null);
     fetch(
       'https://codesandbox-burger-default-rtdb.firebaseio.com/orders.json',
       {
@@ -42,15 +40,18 @@ const Checkout: FC = () => {
       }
     )
       .then((res) => {
-        setIsLoading(false);
-        if (!res.ok) {
-          throw new Error('something went wrong!');
+        if (res.ok) {
+          return res.json();
         } else {
-          history.replace('/orders');
+          throw new Error('something went wrong!');
         }
       })
+      .then((data) => {
+        dispatch(resetOrder());
+        history.replace('/orders');
+      })
       .catch((err) => {
-        setError(err.message);
+        console.log(err.message);
       });
   };
   return (
