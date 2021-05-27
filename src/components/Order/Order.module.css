@@ -30,7 +30,8 @@
   padding: 0 0 5px !important;
 }
 
-.OrderIngredients {
+.OrderIngredients,
+.OrderName {
   margin: 0;
   border-radius: 10px 10px 0 0;
   color: #e27507;
@@ -38,6 +39,10 @@
   font-weight: 700;
 }
 
+.OrderName {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
 .OrderPrice {
   margin: 0;
   border-radius: 0 0 10px 10px;

@@ -4,3 +4,7 @@ export interface Ingredients {
   };
   totalPrice: number;
 }
+
+export interface BurgerIngredients {
+  [ingredient: string]: number;
+}

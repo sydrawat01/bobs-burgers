@@ -1,10 +1,12 @@
 import { FC, FormEvent, useRef, useState } from 'react';
 
+import { Customer } from '../../../models/Customer';
+
 import Modal from '../../../components/UI/Modal/Modal';
 
 import classes from './ContactData.module.css';
 
-const ContactData: FC<{ order: (data: {}) => void }> = (props) => {
+const ContactData: FC<{ order: (data?: Customer) => void }> = (props) => {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const streetInputRef = useRef<HTMLInputElement>(null);
   const postalInputRef = useRef<HTMLInputElement>(null);

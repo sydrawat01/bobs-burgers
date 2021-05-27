@@ -3,12 +3,15 @@ import { FC } from 'react';
 import burgerLogo from '../../assets/images/burger-logo.png';
 import classes from './Order.module.css';
 
+import { BurgerIngredients } from '../../models/Burger';
+
 const Order: FC<{
-  ingredients: { [x: string]: number };
-  price: number;
+  ingredients: BurgerIngredients;
+  price?: number;
+  name?: string;
 }> = (props) => {
   const ingredients = props.ingredients;
-  const orderDetails = Object.keys(ingredients).map((igKey) => {
+  const orderDetails = Object.keys(ingredients!).map((igKey) => {
     return (
       <span
         key={igKey}
@@ -32,11 +35,12 @@ const Order: FC<{
       </div>
 
       <div className={classes.OrderInfo}>
-        <p className={classes.OrderIngredients}>Ingredients:</p>
+        <p className={classes.OrderName}>Order By: {props.name}</p>
+        <p className={classes.BurgerIngredients}>Ingredients:</p>
         {orderDetails}
 
         <p className={classes.OrderPrice}>
-          Price:<strong> ${Number.parseFloat(props.price.toFixed(2))} </strong>
+          Price:<strong> ${Number.parseFloat(props.price!.toFixed(2))} </strong>
         </p>
       </div>
     </div>
