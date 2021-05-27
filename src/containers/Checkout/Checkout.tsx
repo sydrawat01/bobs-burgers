@@ -1,20 +1,31 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useHistory, Route } from 'react-router-dom';
 import {
   useAppSelector,
   items,
   useAppDispatch,
 } from '../../store/hooks/rtkHooks';
-import { resetOrder } from '../../store/actions/burgerActions';
+
+import { Order } from '../../models/Order';
+import {
+  placeOrder,
+  newOrderSelector,
+} from '../../store/reducers/newOrderSlice';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import Modal from '../../components/UI/Modal/Modal';
+import { Customer } from '../../models/Customer';
 
 const Checkout: FC = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { ingredients, totalPrice } = useAppSelector(items);
+  const { loading, error } = useAppSelector(newOrderSelector);
   const path = `${history.location.pathname}/contact-data`;
+
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const checkoutCancelledHandler = () => {
     history.replace('/');
@@ -23,44 +34,38 @@ const Checkout: FC = () => {
     history.replace(path);
   };
 
-  const pushOrderData = async (data: {}) => {
-    const order = {
+  const pushOrderData = async (data?: Customer) => {
+    const order: Order = {
       ingredients,
       price: totalPrice,
       customer: data,
     };
-    fetch(process.env.REACT_APP_ORDERS!, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(order),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error('something went wrong!');
-        }
-      })
-      .then((data) => {
-        dispatch(resetOrder());
-        history.replace('/orders');
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    await dispatch(placeOrder(order));
+    if (!loading) {
+      history.replace('/orders');
+    }
   };
+
   return (
-    <div style={{ paddingTop: '25px' }}>
-      <CheckoutSummary
-        checkoutCancelled={checkoutCancelledHandler}
-        checkoutContinued={checkoutContinuedHandler}
-      />
-      <Route path={path}>
-        <ContactData order={pushOrderData} />
-      </Route>
-    </div>
+    <>
+      <div style={{ paddingTop: '25px' }}>
+        <CheckoutSummary
+          checkoutCancelled={checkoutCancelledHandler}
+          checkoutContinued={checkoutContinuedHandler}
+        />
+        <Route path={path}>
+          <ContactData order={pushOrderData} />
+        </Route>
+      </div>
+      {loading && !error && <Spinner />}
+      {!loading && error && showModal && (
+        <Modal show={showModal} close={() => setShowModal(false)}>
+          <h3 style={{ textAlign: 'center' }}>
+            Something went wrong in placing the order! Please try again!
+          </h3>
+        </Modal>
+      )}
+    </>
   );
 };
 

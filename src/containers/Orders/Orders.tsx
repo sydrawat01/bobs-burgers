@@ -5,48 +5,24 @@ import Order from '../../components/Order/Order';
 import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
-interface resultType {
-  ingredients: {
-    [ingredient: string]: number;
-  };
-  customer: {
-    address: {
-      [addressItem: string]: string;
-    };
-  };
-  price: number;
-}
+import { useAppDispatch, useAppSelector } from '../../store/hooks/rtkHooks';
+import { fetchOrders, orderSelector } from '../../store/reducers/orderSlice';
 
-interface dataType {
-  [key: string]: resultType;
-}
+import { Order as OrderData } from '../../models/Order';
 
 const Orders: FC = () => {
-  const [data, setData] = useState<dataType>({});
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
+  const { data, loading, error } = useAppSelector(orderSelector);
   const [showModal, setShowModal] = useState<boolean>(false);
 
   useEffect(() => {
-    getOrders();
-  }, []);
-
-  const getOrders = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const req = await fetch(process.env.REACT_APP_ORDERS!);
-      setIsLoading(false);
-      if (!req.ok) throw new Error('Unable to reach server at the moment!');
-      const res = await req.json();
-      setData(res);
-    } catch (err) {
+    dispatch(fetchOrders());
+    if (error) {
       setShowModal(true);
-      setError(err.message);
     }
-  };
+  }, [dispatch, error]);
 
-  let resArr: resultType[] = [];
+  let resArr: OrderData[] = [];
   let fetchedOrders;
   if (data) {
     const resData = Object.values(data);
@@ -57,7 +33,8 @@ const Orders: FC = () => {
       <Order
         key={uuidv4()}
         price={order.price}
-        ingredients={order.ingredients}
+        name={order.customer?.name}
+        ingredients={order.ingredients!}
       />
     ));
   } else {
@@ -69,10 +46,12 @@ const Orders: FC = () => {
   return (
     <div style={{ paddingTop: '25px' }}>
       <h1 style={{ textAlign: 'center', color: '#888888' }}>Previous Orders</h1>
-      {isLoading && !error ? <Spinner /> : fetchedOrders}
-      {!isLoading && error ? (
+      {loading && !error ? <Spinner /> : fetchedOrders}
+      {!loading && error && showModal ? (
         <Modal show={showModal} close={() => setShowModal(false)}>
-          {error}
+          <h3 style={{ textAlign: 'center' }}>
+            Something went wrong in fetching the orders!
+          </h3>
         </Modal>
       ) : null}
     </div>
