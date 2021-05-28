@@ -42,13 +42,19 @@
 }
 
 .InputElement:focus {
-  outline: none;
-  background-color: #ccc;
+  border-color: #ff8800;
+  background-color: #fbe8d2;
 }
 
 .Invalid {
-  border: 1px solid red;
+  border: 1px solid #b40e0e;
   background-color: #fda49a;
+}
+
+.Error-text {
+  margin: -2rem 0 2rem 0;
+  text-align: left;
+  color: #b40e0e;
 }
 
 .Button {
